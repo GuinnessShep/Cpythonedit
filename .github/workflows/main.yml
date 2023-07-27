@@ -21,9 +21,9 @@ jobs:
 
       - name: Create new repository and push
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         run: |
           cd repo
-          curl -u "guinnessshep:${GITHUB_TOKEN}" https://api.github.com/user/repos -d '{"name":"ishdev"}'
+          curl -u "guinnessshep:${PERSONAL_TOKEN}" https://api.github.com/user/repos -d '{"name":"ishdev"}'
           git remote set-url origin https://github.com/username/ishdev.git
           git push -u origin development
