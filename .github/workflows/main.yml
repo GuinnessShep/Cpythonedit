@@ -1,0 +1,29 @@
+name: Download and create repo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        
+      - name: Set up Git
+        run: |
+          git config --global user.email "guinnessgshep@gmail.com.com"
+          git config --global user.name "Guinness Shepherd"
+
+      - name: Download files from specific branch
+        run: |
+          git clone --branch development --single-branch https://github.com/username/repo.git
+
+      - name: Create new repository and push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd repo
+          curl -u "guinnessshep:${GITHUB_TOKEN}" https://api.github.com/user/repos -d '{"name":"ishdev"}'
+          git remote set-url origin https://github.com/username/ishdev.git
+          git push -u origin development
